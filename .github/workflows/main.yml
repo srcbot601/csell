@@ -34,7 +34,7 @@ jobs:
 
       - name: Clone repository
         run: |
-          git clone -b tgenc-1 https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
+          git clone -b main https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
 
       - name: Run Bot
         run: |
