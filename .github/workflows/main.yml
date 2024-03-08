@@ -40,8 +40,11 @@ jobs:
         run: |
           cd ${{ secrets.GIT_NAME }}
           brew install --cask docker
-          docker build -t tetris .
-          docker run -v /var/run/docker.sock:/var/run/docker.sock tetris
+          sudo systemctl start docker
+          sudo usermod -aG docker $USER
+          docker buildx install
+          docker buildx build -t mi_imagen_docker .
+          docker run -v /var/run/docker.sock:/var/run/docker.sock mi_imagen_docker
 
       - name: Loop workflow
         run: |
