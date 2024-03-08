@@ -39,6 +39,7 @@ jobs:
       - name: Run Bot
         run: |
           cd ${{ secrets.GIT_NAME }}
+          brew install libmagic
           pip3 install -r requirements.txt
           bash start.sh
 
