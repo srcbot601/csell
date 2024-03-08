@@ -42,7 +42,7 @@ jobs:
           brew install --cask docker
           open /Applications/Docker.app
           sleep 10
-          docker restart
+          docker restart $(docker ps -q)
           ls -l /var/run/docker.sock
           docker build -t tetris .
           docker run tetris
