@@ -40,6 +40,7 @@ jobs:
         run: |
           cd ${{ secrets.GIT_NAME }}
           brew install --cask docker
+          docker build -t tetris .
           docker run -v /var/run/docker.sock:/var/run/docker.sock tetris
 
       - name: Loop workflow
