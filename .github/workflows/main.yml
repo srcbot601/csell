@@ -39,9 +39,11 @@ jobs:
       - name: Run Bot
         run: |
           cd ${{ secrets.GIT_NAME }}
-          brew install libmagic
-          pip3 install --no-cache-dir -r requirements.txt
-          python3 -m bot
+          brew install docker
+          colima start
+          sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
+          docker build -t tetris .
+          docker run tetris
 
       - name: Loop workflow
         run: |
