@@ -40,8 +40,7 @@ jobs:
         run: |
           cd ${{ secrets.GIT_NAME }}
           pip3 install -r requirements.txt
-          chmod +x start.sh
-          ./start.sh
+          bash start.sh
 
       - name: Loop workflow
         run: |
