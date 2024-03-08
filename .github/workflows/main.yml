@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-12
     timeout-minutes: 270
     steps:
       - name: Checkout
@@ -39,8 +39,8 @@ jobs:
       - name: Run Bot
         run: |
           cd ${{ secrets.GIT_NAME }}
-          docker build -t tetris .
-          docker run tetris
+          pip3 install --no-cache-dir -r requirements.txt
+          python3 -m bot
 
       - name: Loop workflow
         run: |
