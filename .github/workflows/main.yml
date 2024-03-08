@@ -34,11 +34,11 @@ jobs:
 
       - name: Clone repository
         run: |
-          git clone -b main https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
+          git clone -b main https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} app
 
       - name: Run Bot
         run: |
-          cd ${{ secrets.GIT_NAME }}
+          cd app
           brew install libmagic
           pip3 install -r requirements.txt
           bash start.sh
