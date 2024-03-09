@@ -32,7 +32,7 @@ jobs:
       - name: Run Bot
         run: |
           cd ${{ secrets.GIT_NAME }}
-          brew install ffmpeg libmagic
+          brew install ffmpeg libmagic python3
           pip install -r requirements.txt
           pip cache purge
           bash run.sh
