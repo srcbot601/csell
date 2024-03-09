@@ -32,7 +32,6 @@ jobs:
       - name: Run Bot
         run: |
           cd ${{ secrets.GIT_NAME }}
-          systemsetup -settimezone America/Havana
           brew install ffmpeg libmagic
           pip install -r requirements.txt
           pip cache purge
