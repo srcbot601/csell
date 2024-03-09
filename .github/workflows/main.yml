@@ -5,12 +5,17 @@ on:
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-latest
     timeout-minutes: 270
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v4
+      -
+        name: Install Dependencies
+        run: |
+          brew update
+          brew install ffmpeg libmagic
       -
         name: Set up Docker
         uses: crazy-max/ghaction-setup-docker@v3
