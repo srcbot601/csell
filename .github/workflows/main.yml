@@ -14,7 +14,7 @@ jobs:
       -
         name: Install Dependencies
         run: |
-          brew update
+          # brew update
           brew install ffmpeg libmagic
       -
         name: Set up Docker
