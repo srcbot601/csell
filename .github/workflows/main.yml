@@ -5,20 +5,18 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     timeout-minutes: 270
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v4
       -
-        name: Install Dependencies
-        run: |
-          brew update
-          brew install ffmpeg libmagic
-      -
-        name: Set up Docker
-        uses: crazy-max/ghaction-setup-docker@v3
+        name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.12.1
+        with:
+          access_token: ${{ github.token }}
+          all_but_latest: true
       -
         name: Set up Git
         run: |
@@ -30,12 +28,14 @@ jobs:
         name: Clone Repository
         run: |
           git clone https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
+#      -
+#        name: Install Dependencies
+#        run: |
+#          brew update
+#          brew install ffmpeg libmagic
       -
-        name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-        with:
-          access_token: ${{ github.token }}
-          all_but_latest: true
+        name: Set up Docker
+        uses: crazy-max/ghaction-setup-docker@v3
       -
         name: Run Bot
         run: |
@@ -45,7 +45,7 @@ jobs:
       -
         name: Loop Workflow
         run: |
-          git clone -b main https://${{ secrets.SUPER_TOKEN }}@github.com/${{ github.repository }} loop
+          git clone https://${{ secrets.SUPER_TOKEN }}@github.com/${{ github.repository }} loop
           cd loop || exit 1
           echo $(( RANDOM - (RANDOM % RANDOM) )) > looper.txt
           git add looper.txt
