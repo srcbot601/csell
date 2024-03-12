@@ -10,8 +10,8 @@ jobs:
       matrix:
         os:
           # ubuntu-latest
-          - macos-13
-          # macos-latest
+          # macos-13
+          - macos-latest
           - windows-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
       -
         name: Set up Docker
         if: runner.os == 'macOS'
-        uses: crazy-max/ghaction-setup-docker@v3
+        uses: crazy-max/ghaction-setup-docker@v2
       -
         name: Set up Git
         continue-on-error: true
