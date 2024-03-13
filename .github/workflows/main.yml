@@ -3,37 +3,21 @@ name: Workflow
 on:
   workflow_dispatch:
   push:
-  
+
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-#          - ubuntu-latest
-          - macos-13
-#          - macos-latest
+    runs-on: macos-13
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.12.1
         with:
           all_but_latest: true
           access_token: ${{ github.token }}
-          
-      - name: Set up Python
-        if: matrix.os == 'macos-14'
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-          
-      - name: Set up Docker
-        if: matrix.os == 'macos-latest'
-        uses: crazy-max/ghaction-setup-docker@v3.1.0
-        
+
       - name: Set up Git
         continue-on-error: true
         run: |
@@ -41,23 +25,13 @@ jobs:
           git config --global user.email ${{ secrets.GIT_EMAIL }}
           git config --global credential.helper store
           echo "https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
-          
+
       - name: Cloning Repo
         continue-on-error: true
         run: |
           git clone https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
-          
-      - name: Build and run Docker
-        if: matrix.os != 'macos-14'
-        timeout-minutes: 270
-        continue-on-error: false
-        run: |
-          cd ${{ secrets.GIT_NAME }}
-          docker build . -t tetris
-          docker run tetris
-          
+
       - name: Running Code
-        if: matrix.os == 'macos-14'
         timeout-minutes: 270
         continue-on-error: false
         run: |
@@ -65,7 +39,7 @@ jobs:
           brew install ffmpeg libmagic
           pip3 install -r requirements.txt
           python3 -m bot
-          
+
       - name: Loop Workflow
         continue-on-error: true
         run: |
