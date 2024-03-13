@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         os:
-          #- ubuntu-latest
-          #- macos-latest
+          - ubuntu-latest
+          - macos-latest
           - windows-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
           access_token: ${{ github.token }}
       -
         name: Set up Docker
-        if: runner.os == 'macOS'
+        # if: runner.os == 'macOS'
         uses: crazy-max/ghaction-setup-docker@v3.1.0
       -
         name: Set up Git
