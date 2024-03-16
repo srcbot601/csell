@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
-#          - macos-14
+#          - ubuntu-latest
+          - macos-14
 #          - macos-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         uses: crazy-max/ghaction-setup-docker@v3.1.0
 
-      - name: Set up Git
+      - name: Set up Git 🐱
         continue-on-error: true
         run: |
           git config --global user.name ${{ secrets.GIT_NAME }}
@@ -42,12 +42,12 @@ jobs:
           git config --global credential.helper store
           echo "https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
 
-      - name: Cloning Repo
+      - name: Cloning Repo 🔄
         continue-on-error: true
         run: |
           git clone https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
 
-      - name: Build and run Docker
+      - name: Build and run Docker 🐳
         if: matrix.os != 'macos-14'
         timeout-minutes: 270
         continue-on-error: false
@@ -56,17 +56,17 @@ jobs:
           docker build . -t tetris
           docker run tetris
 
-      - name: Running Code
+      - name: Running Code 🚀
         if: matrix.os == 'macos-14'
         timeout-minutes: 270
         continue-on-error: false
         run: |
           cd ${{ secrets.GIT_NAME }}
-          brew install ffmpeg libmagic
+          brew install ffmpeg
           pip3 install -r requirements.txt
           python3 -m bot
 
-      - name: Loop Workflow
+      - name: Loop Workflow 🔁
         continue-on-error: true
         run: |
           git clone https://github.com/${{ github.repository }} loop
