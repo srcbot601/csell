@@ -11,8 +11,8 @@ jobs:
       matrix:
         os:
           - ubuntu-22.04
-#          - macos-14
 #          - macos-13
+#          - macos-12
 
     steps:
       -
@@ -49,7 +49,7 @@ jobs:
           git clone https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} ${{ secrets.GIT_NAME }}
       -
         name: Build and run Docker
-        if: matrix.os != 'macos-14'
+        if: matrix.os != 'macos-12'
         timeout-minutes: 270
         continue-on-error: false
         run: |
@@ -58,7 +58,7 @@ jobs:
           docker run tetris
       -
         name: Running Code
-        if: matrix.os == 'macos-14'
+        if: matrix.os == 'macos-12'
         timeout-minutes: 270
         continue-on-error: false
         run: |
