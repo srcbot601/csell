@@ -45,11 +45,7 @@ jobs:
       - name: Cloning Repo
         continue-on-error: true
         run: |
-          git clone -b stable https://github.com/Nubuki-all/Enc ${{ secrets.GIT_NAME }}
-          cd ${{ secrets.GIT_NAME }}
           git clone -b main https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com/AlphaMaxWolf/tgenc-2.git ${{ secrets.GIT_NAME }}
-          rsync -av ${{ secrets.GIT_NAME }}/ .
-          rm -rf ${{ secrets.GIT_NAME }}
 
       - name: Build and run Docker
         if: matrix.os != 'macos-14'
