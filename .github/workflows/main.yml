@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-22.04
+          - ubuntu-24.04
           # - macos-14
           # - macos-13
 
@@ -32,7 +32,7 @@ jobs:
 
       - name: Set up Docker
         if: matrix.os == 'macos-13'
-        uses: crazy-max/ghaction-setup-docker@v3.1.0
+        uses: crazy-max/ghaction-setup-docker@v3
 
       - name: Set up Git
         continue-on-error: true
